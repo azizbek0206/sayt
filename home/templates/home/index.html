@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Food Restaurant</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4a574;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4a574;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #f8f6f3;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #2c2c2c;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #d4a574;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c19660;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #d4a574;
+            border: 2px solid #d4a574;
+        }
+
+        .btn-secondary:hover {
+            background: #d4a574;
+            color: white;
+        }
+
+        .hero-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .hero-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .hero-image:nth-child(2) {
+            margin-top: 2rem;
+        }
+
+        /* Browse Menu Section */
+        .browse-menu {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c2c2c;
+            font-weight: 400;
+        }
+
+        .menu-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: #f8f6f3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: #d4a574;
+        }
+
+        .category-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2c2c2c;
+        }
+
+        .category-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Healthy Food Section */
+        .healthy-food {
+            padding: 80px 0;
+            background: #f8f6f3;
+        }
+
+        .healthy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .healthy-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .healthy-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .healthy-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c2c2c;
+            font-weight: 400;
+        }
+
+        .healthy-text p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #2c2c2c;
+        }
+
+        /* Delivery Section */
+        .delivery {
+            padding: 80px 0;
+            background: #f8f6f3;
+        }
+
+        .delivery-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .delivery-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .delivery-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .delivery-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .delivery-image:first-child {
+            grid-row: span 2;
+        }
+
+        .delivery-image:first-child img {
+            height: 100%;
+        }
+
+        .delivery-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c2c2c;
+            font-weight: 400;
+        }
+
+        .delivery-features {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .delivery-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .delivery-features i {
+            color: #d4a574;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8f6f3;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: #2c2c2c;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 80px 0;
+            background: #f8f6f3;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-main {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        .blog-main img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c2c2c;
+        }
+
+        .blog-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .blog-sidebar {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .blog-small {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .blog-small img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .blog-small-content {
+            padding: 1rem;
+        }
+
+        .blog-small h4 {
+            font-size: 1rem;
+            color: #2c2c2c;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c2c2c;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: #d4a574;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4a574;
+        }
+
+        .footer-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .footer-image {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .footer-image img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content,
+            .healthy-content,
+            .delivery-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">Bistro Bliss</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Best food for your taste</h1>
+                    <p>Discover delectable cuisine and unforgettable moments in our welcoming, culinary haven.</p>
+                    <div class="hero-buttons">
+                        <a href="#menu" class="btn btn-primary">Book A Table</a>
+                        <a href="#menu" class="btn btn-secondary">Explore Menu</a>
+                    </div>
+                </div>
+                <div class="hero-images">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1662947190722-5d272f82a526?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z29vZ2xlJTIwbG9nb3xlbnwwfHwwfHx8MA%3D%3D" alt="Delicious pasta dish">
+                    </div>
+                    <div class="hero-image">
+                        <img src="https://st4.depositphotos.com/21607914/23432/i/450/depositphotos_234323564-stock-photo-chinese-netizen-looks-logo-google.jpg" alt="Fresh salad">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse Menu Section -->
+    <section class="browse-menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">Browse Our Menu</h2>
+            <div class="menu-categories">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <h3>Breakfast</h3>
+                    <p>In the new era of technology we look in the future with certainty and pride for our life.</p>
+                    <a href="#" style="color: #d4a574; text-decoration: none;">Explore Menu</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Main Dishes</h3>
+                    <p>In the new era of technology we look in the future with certainty and pride for our life.</p>
+                    <a href="#" style="color: #d4a574; text-decoration: none;">Explore Menu</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-cocktail"></i>
+                    </div>
+                    <h3>Drinks</h3>
+                    <p>In the new era of technology we look in the future with certainty and pride for our life.</p>
+                    <a href="#" style="color: #d4a574; text-decoration: none;">Explore Menu</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <h3>Desserts</h3>
+                    <p>In the new era of technology we look in the future with certainty and pride for our life.</p>
+                    <a href="#" style="color: #d4a574; text-decoration: none;">Explore Menu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Healthy Food Section -->
+    <section class="healthy-food">
+        <div class="container">
+            <div class="healthy-content">
+                <div class="healthy-image">
+                    <img src="https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg" alt="Healthy food preparation">
+                </div>
+                <div class="healthy-text">
+                    <h2>We provide healthy food for your family.</h2>
+                    <p>Our story began with a vision to create a unique dining experience that merges fine dining, exceptional service, and a vibrant ambiance. Rooted in city's rich culinary culture, we aim to honor our local roots while infusing a global palate.</p>
+                    <p>At place, we believe that dining is not just about food, but also about the overall experience. Our staff, renowned for their warmth and dedication, strives to make every visit an unforgettable event.</p>
+                    <a href="#" class="btn btn-primary">More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">We also offer unique services for your events</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://media.istockphoto.com/id/650655146/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%B5-%D1%81%D0%B2%D0%B0%D0%B4%D0%B5%D0%B1%D0%BD%D0%BE%D0%B5-%D1%81%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D0%B5-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0.jpg?s=612x612&w=0&k=20&c=mgCGDKd6Unr033bNsCpvcClFVNuOvn99fLTv_9i5SqQ=" alt="Catering service">
+                    </div>
+                    <h3>Caterings</h3>
+                    <p>In the new era of technology we look in the future with certainty for our life.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://static.vecteezy.com/system/resources/previews/026/878/939/non_2x/happy-birthday-background-with-copy-space-ai-generative-photo.jpg" alt="Birthday celebration">
+                    </div>
+                    <h3>Birthdays</h3>
+                    <p>In the new era of technology we look in the future with certainty for our life.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://img.freepik.com/free-photo/beautiful-archway-decorated-with-floral-composition-outdoors_8353-10972.jpg?semt=ais_hybrid&w=740" alt="Wedding service">
+                    </div>
+                    <h3>Weddings</h3>
+                    <p>In the new era of technology we look in the future with certainty for our life.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://t4.ftcdn.net/jpg/02/16/94/65/360_F_216946587_rmug8FCNgpDCPQlstiCJ0CAXJ2sqPRU7.jpg" alt="Business events">
+                    </div>
+                    <h3>Events</h3>
+                    <p>In the new era of technology we look in the future with certainty for our life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delivery Section -->
+    <section class="delivery">
+        <div class="container">
+            <div class="delivery-content">
+                <div class="delivery-images">
+                    <div class="delivery-image">
+                        <img src="https://img.freepik.com/free-vector/detailed-chef-logo-template_23-2148987940.jpg?semt=ais_hybrid&w=740" alt="Chef cooking">
+                    </div>
+                    <div class="delivery-image">
+                        <img src="https://img.freepik.com/free-photo/high-angle-delicious-burger-with-flag_23-2149897343.jpg" alt="Delicioburgerus ">
+                    </div>
+                    <div class="delivery-image">
+                        <img src="https://media.istockphoto.com/id/1409514526/photo/healthy-food-healthy-eating-background-fruit-vegetable-berry-vegetarian-eating-superfood.jpg?s=612x612&w=0&k=20&c=nwH6Clh2YCn4PbzNjtgGv8KBn1MxGdJpqsxvI1nRMrg=" alt="Fresh ingredients">
+                    </div>
+                </div>
+                <div class="delivery-text">
+                    <h2>Fastest Food Delivery in City</h2>
+                    <p>Our visual designer lets you quickly and of drag a down your way to customapps for both keep desktop.</p>
+                    <ul class="delivery-features">
+                        <li><i class="fas fa-clock"></i> Delivery within 30 minutes</li>
+                        <li><i class="fas fa-dollar-sign"></i> Best Offer & Prices</li>
+                        <li><i class="fas fa-shopping-cart"></i> Online Services Available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The best restaurant"</p>
+                    <p>Last night, we dined at place and were simply blown away. From the moment we stepped in, we were enveloped in an inviting atmosphere and greeted with warm smiles.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/placeholder.svg?height=50&width=50" alt="Sophire Robson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sophire Robson</h4>
+                            <p>Los Angeles, CA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Simply delicious"</p>
+                    <p>Place exceeded my expectations on all fronts. The ambiance was cozy and relaxed, making it a perfect venue for our anniversary dinner. Each dish was prepared and beautifully presented.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/placeholder.svg?height=50&width=50" alt="Matt Cannon">
+                        </div>
+                        <div class="author-info">
+                            <h4>Matt Cannon</h4>
+                            <p>San Diego, CA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"One of a kind restaurant"</p>
+                    <p>The culinary experience at place is first to none. The atmosphere is vibrant, the food - nothing short of extraordinary. The food was the highlight of our evening. Highly recommended.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/placeholder.svg?height=50&width=50" alt="Andy Smith">
+                        </div>
+                        <div class="author-info">
+                            <h4>Andy Smith</h4>
+                            <p>San Francisco, CA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 class="section-title" style="margin: 0;">Our Blog & Articles</h2>
+                <a href="#" class="btn btn-primary">Read All Articles</a>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-main">
+                    <img src="/placeholder.svg?height=300&width=600" alt="Perfect burger">
+                    <div class="blog-content">
+                        <h3>The secret tips & tricks to prepare a perfect burger & pizza for our customers</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur of a adipiscing elitilmim semper adipiscing massa gravida nisi cras enim quis nibholm varius amet gravida ut facilisis neque egestas.</p>
+                    </div>
+                </article>
+                <aside class="blog-sidebar">
+                    <article class="blog-small">
+                        <img src="/placeholder.svg?height=120&width=200" alt="Cooking tips">
+                        <div class="blog-small-content">
+                            <h4>How to prepare the perfect french fries in an air fryer</h4>
+                        </div>
+                    </article>
+                    <article class="blog-small">
+                        <img src="/placeholder.svg?height=120&width=200" alt="Healthy meal">
+                        <div class="blog-small-content">
+                            <h4>How to prepare delicious chicken tenders</h4>
+                        </div>
+                    </article>
+                    <article class="blog-small">
+                        <img src="/placeholder.svg?height=120&width=200" alt="Pizza recipe">
+                        <div class="blog-small-content">
+                            <h4>7 delicious cheesecake recipes you can prepare</h4>
+                        </div>
+                    </article>
+                    <article class="blog-small">
+                        <img src="/placeholder.svg?height=120&width=200" alt="Dessert">
+                        <div class="blog-small-content">
+                            <h4>5 great pizza restaurants you should visit this city</h4>
+                        </div>
+                    </article>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Bistro Bliss</h3>
+                    <p>In the new era of technology we look a future with certainty and pride to for our company and.</p>
+                    <div style="margin-top: 1rem;">
+                        <i class="fab fa-twitter" style="margin-right: 1rem; color: #d4a574;"></i>
+                        <i class="fab fa-facebook" style="margin-right: 1rem; color: #d4a574;"></i>
+                        <i class="fab fa-instagram" style="margin-right: 1rem; color: #d4a574;"></i>
+                        <i class="fab fa-github" style="color: #d4a574;"></i>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Pages</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Utility Pages</h3>
+                    <ul>
+                        <li><a href="#">Start Here</a></li>
+                        <li><a href="#">Styleguide</a></li>
+                        <li><a href="#">Password Protected</a></li>
+                        <li><a href="#">404 Not Found</a></li>
+                        <li><a href="#">Licenses</a></li>
+                        <li><a href="#">Changelog</a></li>
+                        <li><a href="#">View More</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow us on Instagram</h3>
+                    <div class="footer-images">
+                        <div class="footer-image">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Food 1">
+                        </div>
+                        <div class="footer-image">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Food 2">
+                        </div>
+                        <div class="footer-image">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Food 3">
+                        </div>
+                        <div class="footer-image">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Food 4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2023 Bistro Bliss. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

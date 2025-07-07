@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloqa - Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-utensils"></i> Restaurant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Bosh sahifa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'menu' %}">Menyu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'contact' %}">Aloqa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-3">
+                        <i class="fas fa-phone"></i> Biz bilan bog'laning
+                    </h1>
+                    <p class="lead mb-4">Savollaringiz bormi? Biz sizga yordam berishga tayyormiz!</p>
+                    <a href="#contact-form" class="btn btn-light btn-lg">
+                        <i class="fas fa-envelope"></i> Xabar yuborish
+                    </a>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-comments fa-5x opacity-75"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
+                            <h5>Bizning manzil</h5>
+                            <p class="text-muted">
+                                Toshkent shahar, Chilonzor tumani<br>
+                                Bunyodkor ko'chasi, 1-uy<br>
+                                100000, O'zbekiston
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-phone fa-3x text-success mb-3"></i>
+                            <h5>Telefon raqamlar</h5>
+                            <p class="text-muted">
+                                <strong>Asosiy:</strong> +998 90 123 45 67<br>
+                                <strong>Qo'shimcha:</strong> +998 71 123 45 67<br>
+                                <strong>WhatsApp:</strong> +998 90 123 45 67
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <i class="fas fa-clock fa-3x text-warning mb-3"></i>
+                            <h5>Ish vaqti</h5>
+                            <p class="text-muted">
+                                <strong>Dushanba - Yakshanba:</strong><br>
+                                09:00 - 23:00<br>
+                                <small class="text-success">Har kuni ochiq</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact-form" class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="text-center mb-5">
+                        <h2>Xabar yuborish</h2>
+                        <p class="text-muted">Bizga xabar yuboring, tez orada javob beramiz</p>
+                    </div>
+                    
+                    <div class="card shadow">
+                        <div class="card-body p-4">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">
+                                            <i class="fas fa-user"></i> Ism *
+                                        </label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">
+                                            <i class="fas fa-envelope"></i> Email *
+                                        </label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">
+                                            <i class="fas fa-phone"></i> Telefon
+                                        </label>
+                                        <input type="tel" class="form-control" id="phone">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="subject" class="form-label">
+                                            <i class="fas fa-tag"></i> Mavzu *
+                                        </label>
+                                        <select class="form-select" id="subject" required>
+                                            <option value="">Mavzu tanlang...</option>
+                                            <option value="order">Buyurtma haqida</option>
+                                            <option value="complaint">Shikoyat</option>
+                                            <option value="suggestion">Taklif</option>
+                                            <option value="other">Boshqa</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">
+                                        <i class="fas fa-comment"></i> Xabar *
+                                    </label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-paper-plane"></i> Xabar yuborish
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Bizni topish</h2>
+                <p class="text-muted">Restoranimizning joylashuvi</p>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div style="height: 400px; background: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                                <div class="text-center">
+                                    <i class="fas fa-map fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">Bu yerda xarita bo'ladi</p>
+                                    <small class="text-muted">Google Maps yoki boshqa xarita xizmati</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media -->
+    <section class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="mb-0">Ijtimoiy tarmoqlarda kuzating</h5>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3">
+                        <i class="fab fa-facebook fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-white me-3">
+                        <i class="fab fa-instagram fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-white me-3">
+                        <i class="fab fa-telegram fa-2x"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="fab fa-youtube fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Restaurant. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

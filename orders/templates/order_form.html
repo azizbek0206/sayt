@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyurtma berish - Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-utensils"></i> Restaurant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Bosh sahifa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'menu' %}">Menyu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Aloqa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center mb-5">
+                    <h1><i class="fas fa-shopping-cart"></i> Buyurtma berish</h1>
+                    <p class="lead text-muted">Ma'lumotlaringizni to'ldiring va buyurtma bering</p>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="card shadow">
+                    <div class="card-body p-4">
+                        <form method="post" id="orderForm">
+                            {% csrf_token %}
+                            
+                            <!-- Customer Information -->
+                            <div class="mb-4">
+                                <h5 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-user"></i> Shaxsiy ma'lumotlar
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_customer_name" class="form-label">Ism *</label>
+                                        <input type="text" class="form-control" id="id_customer_name" name="customer_name" required>
+                                        {% if form.customer_name.errors %}
+                                            <div class="text-danger small">{{ form.customer_name.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_customer_phone" class="form-label">Telefon *</label>
+                                        <input type="tel" class="form-control" id="id_customer_phone" name="customer_phone" required>
+                                        {% if form.customer_phone.errors %}
+                                            <div class="text-danger small">{{ form.customer_phone.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_customer_email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="id_customer_email" name="customer_email">
+                                    {% if form.customer_email.errors %}
+                                        <div class="text-danger small">{{ form.customer_email.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Food Selection -->
+                            <div class="mb-4">
+                                <h5 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-utensils"></i> Taom tanlash
+                                </h5>
+                                <div class="mb-3">
+                                    <label for="id_food" class="form-label">Taom *</label>
+                                    <select class="form-select" id="id_food" name="food" required>
+                                        <option value="">Taom tanlang...</option>
+                                        {% for food in foods %}
+                                        <option value="{{ food.id }}" data-price="{{ food.price }}" {% if request.GET.food == food.id|stringformat:'s' %}selected{% endif %}>
+                                            {{ food.name }} - {{ food.price|floatformat:0 }} so'm
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.food.errors %}
+                                        <div class="text-danger small">{{ form.food.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="id_quantity" class="form-label">Miqdor *</label>
+                                        <input type="number" class="form-control" id="id_quantity" name="quantity" min="1" value="1" required>
+                                        {% if form.quantity.errors %}
+                                            <div class="text-danger small">{{ form.quantity.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Jami narx</label>
+                                        <div class="form-control bg-light" id="totalPrice">0 so'm</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Delivery Information -->
+                            <div class="mb-4">
+                                <h5 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-truck"></i> Yetkazib berish
+                                </h5>
+                                <div class="mb-3">
+                                    <label for="id_delivery_address" class="form-label">Yetkazib berish manzili *</label>
+                                    <textarea class="form-control" id="id_delivery_address" name="delivery_address" rows="3" required></textarea>
+                                    {% if form.delivery_address.errors %}
+                                        <div class="text-danger small">{{ form.delivery_address.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="id_delivery_time" class="form-label">Yetkazib berish vaqti</label>
+                                    <select class="form-select" id="id_delivery_time" name="delivery_time">
+                                        <option value="">Tezroq yetkazib bering</option>
+                                        <option value="30min">30 daqiqa ichida</option>
+                                        <option value="1hour">1 soat ichida</option>
+                                        <option value="2hours">2 soat ichida</option>
+                                        <option value="evening">Kechqurun</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Special Instructions -->
+                            <div class="mb-4">
+                                <h5 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-comment"></i> Qo'shimcha ma'lumot
+                                </h5>
+                                <div class="mb-3">
+                                    <label for="id_special_instructions" class="form-label">Maxsus ko'rsatmalar</label>
+                                    <textarea class="form-control" id="id_special_instructions" name="special_instructions" rows="3" placeholder="Masalan: achchiq bo'lmasin, tuzni kam qo'shing..."></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="mb-4">
+                                <h5 class="border-bottom pb-2 mb-3">
+                                    <i class="fas fa-credit-card"></i> To'lov usuli
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment_method" id="cash" value="cash" checked>
+                                            <label class="form-check-label" for="cash">
+                                                <i class="fas fa-money-bill"></i> Naqd pul
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment_method" id="card" value="card">
+                                            <label class="form-check-label" for="card">
+                                                <i class="fas fa-credit-card"></i> Plastik karta
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-check"></i> Buyurtma berish
+                                </button>
+                                <a href="{% url 'menu' %}" class="btn btn-outline-secondary btn-lg ms-2">
+                                    <i class="fas fa-arrow-left"></i> Orqaga
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Restaurant. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate total price
+        function calculateTotal() {
+            const foodSelect = document.getElementById('id_food');
+            const quantityInput = document.getElementById('id_quantity');
+            const totalPriceDiv = document.getElementById('totalPrice');
+            
+            const selectedOption = foodSelect.options[foodSelect.selectedIndex];
+            const price = selectedOption.getAttribute('data-price') || 0;
+            const quantity = quantityInput.value || 1;
+            
+            const total = price * quantity;
+            totalPriceDiv.textContent = total.toLocaleString() + ' so\'m';
+        }
+        
+        document.getElementById('id_food').addEventListener('change', calculateTotal);
+        document.getElementById('id_quantity').addEventListener('input', calculateTotal);
+        
+        // Calculate on page load
+        calculateTotal();
+    </script>
+</body>
+</html>

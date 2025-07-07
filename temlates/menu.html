@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menyu - Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .menu-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/placeholder.svg?height=400&width=1200');
+            background-size: cover;
+            background-position: center;
+        }
+        .category-card {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-utensils"></i> Restaurant
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Bosh sahifa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'menu' %}">Menyu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Aloqa</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="menu-hero text-white py-5">
+        <div class="container">
+            <div class="text-center">
+                <h1 class="display-4 fw-bold mb-3">Bizning Menyu</h1>
+                <p class="lead mb-4">Eng mazali va sifatli taomlardan tanlang</p>
+                <a href="#categories" class="btn btn-primary btn-lg">
+                    <i class="fas fa-arrow-down"></i> Kategoriyalar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section id="categories" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Taom kategoriyalari</h2>
+                <p class="text-muted">Qaysi turdagi taomni istaysiz?</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card category-card h-100 text-center shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="fas fa-utensils fa-3x text-primary mb-3"></i>
+                            <h5>Milliy taomlar</h5>
+                            <p class="text-muted">O'zbek milliy taomlari: osh, lag'mon, manti va boshqalar</p>
+                            <a href="{% url 'food_list' %}?category=milliy" class="btn btn-outline-primary">Ko'rish</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card category-card h-100 text-center shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="fas fa-pizza-slice fa-3x text-danger mb-3"></i>
+                            <h5>Fast Food</h5>
+                            <p class="text-muted">Pizza, burger, hot-dog va boshqa tez tayyorlanadigan taomlar</p>
+                            <a href="{% url 'food_list' %}?category=fastfood" class="btn btn-outline-primary">Ko'rish</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card category-card h-100 text-center shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="fas fa-coffee fa-3x text-warning mb-3"></i>
+                            <h5>Ichimliklar</h5>
+                            <p class="text-muted">Choy, qahva, sharbat va boshqa ichimliklar</p>
+                            <a href="{% url 'food_list' %}?category=drinks" class="btn btn-outline-primary">Ko'rish</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card category-card h-100 text-center shadow-sm">
+                        <div class="card-body p-4">
+                            <i class="fas fa-birthday-cake fa-3x text-success mb-3"></i>
+                            <h5>Shirinliklar</h5>
+                            <p class="text-muted">Tort, kek, muzqaymoq va boshqa shirinliklar</p>
+                            <a href="{% url 'food_list' %}?category=desserts" class="btn btn-outline-primary">Ko'rish</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Tavsiya etilgan taomlar</h2>
+                <p class="text-muted">Oshpazlarimiz tomonidan tavsiya etilgan</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/placeholder.svg?height=250&width=400" class="card-img-top" alt="Osh">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">O'zbek oshi</h5>
+                                <span class="badge bg-success">Mashhur</span>
+                            </div>
+                            <p class="card-text">An'anaviy o'zbek oshi, go'sht, sabzi va guruch bilan</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 text-primary mb-0">25,000 so'm</span>
+                                <div>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'order' %}?food=osh" class="btn btn-primary w-100">
+                                <i class="fas fa-shopping-cart"></i> Buyurtma berish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/placeholder.svg?height=250&width=400" class="card-img-top" alt="Lag'mon">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Lag'mon</h5>
+                                <span class="badge bg-warning">Yangi</span>
+                            </div>
+                            <p class="card-text">Qo'lda tortilgan lag'mon, go'sht va sabzavotlar bilan</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 text-primary mb-0">18,000 so'm</span>
+                                <div>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="far fa-star text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'order' %}?food=lagmon" class="btn btn-primary w-100">
+                                <i class="fas fa-shopping-cart"></i> Buyurtma berish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="/placeholder.svg?height=250&width=400" class="card-img-top" alt="Manti">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title">Manti</h5>
+                                <span class="badge bg-info">Chegirma</span>
+                            </div>
+                            <p class="card-text">Bug'da pishirilgan manti, go'sht va piyoz bilan</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="h5 text-primary mb-0">20,000 so'm</span>
+                                    <small class="text-muted text-decoration-line-through ms-2">25,000</small>
+                                </div>
+                                <div>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'order' %}?food=manti" class="btn btn-primary w-100">
+                                <i class="fas fa-shopping-cart"></i> Buyurtma berish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="{% url 'food_list' %}" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-list"></i> Barcha taomlarni ko'rish
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Maxsus takliflar</h2>
+                <p class="text-muted">Bugungi kun uchun maxsus chegirmalar</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4>Combo taklif</h4>
+                                    <p class="mb-3">Osh + Choy + Salat = 30,000 so'm</p>
+                                    <a href="{% url 'order' %}?combo=1" class="btn btn-light">
+                                        Buyurtma berish
+                                    </a>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <i class="fas fa-utensils fa-4x opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-success text-white">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h4>Hafta oxiri chegirmasi</h4>
+                                    <p class="mb-3">Barcha taomlar uchun 20% chegirma</p>
+                                    <a href="{% url 'food_list' %}" class="btn btn-light">
+                                        Tanlash
+                                    </a>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <i class="fas fa-percentage fa-4x opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 Restaurant. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
