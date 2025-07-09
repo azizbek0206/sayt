@@ -1,0 +1,1 @@
+web: gunivorn config.wsgi:application
